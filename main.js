@@ -23,11 +23,30 @@ UI.prototype.addBookToList = function(book) {
         <td>${book.title}</td>
         <td>${book.author}</td>
         <td>${book.isbn}</td>
-        <td><a href="#" class="delete">X</a></td>
-    `
+        <td><a href="#" class="delete"><i class="far fa-window-close fa-2x"></i></a></td>    `
 
     list.appendChild(row);
 
+}
+
+// UI show alert
+UI.prototype.showAlert = function(message, className) {
+   // create a div
+   const div = document.createElement('div');
+    // add classes to it
+    div.className = `alert ${className}`;
+    // add text to this div
+    div.appendChild(document.createTextNode(message));
+    // get the parent
+    const container = document.querySelector('.container');
+    // get form
+    const form = document.querySelector('#book-form');
+    // insert alert => using Node.insertBefore
+    container.insertBefore(div, form); // this will be added after the h1 directly
+    // giding the alert after 2 seconds
+    setTimeout(() => {
+        document.querySelector('.alert').remove();
+    }, 2000);
 }
 
 // clear fields function
@@ -36,7 +55,6 @@ UI.prototype.addBookToList = function(book) {
         document.getElementById('author').value = '';
         document.getElementById('isbn').value = '';
     }
-
 
 // Event listeners
 document.getElementById('book-form').addEventListener('submit',function(e) {
@@ -53,10 +71,18 @@ document.getElementById('book-form').addEventListener('submit',function(e) {
     // insitantiate ui object from UI constructor
     const ui = new UI();
 
+    // validation
+    if(title === '' || author === '' || isbn === '') {
+        // error alert 
+        ui.showAlert('Please fill in all fields', 'error');
+    } else {
+        // add a book to the list
+        ui.addBookToList(book);
+        // show alert success when the book is added
+        ui.showAlert('Book added successfully', 'success');
+        // clear all fields
+        ui.clearFields();
+    }
 
-    // add a book to the list
-    ui.addBookToList(book);
-
-    // clear all fields
-    ui.clearFields();
+    
 });
