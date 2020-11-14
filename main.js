@@ -6,9 +6,6 @@ function Book(title, author, isbn) {
 }
 
 
-
-
-
 // UI Constructor => will contain methods to deal with UI
 function UI() {}
 
@@ -23,7 +20,7 @@ UI.prototype.addBookToList = function(book) {
         <td>${book.title}</td>
         <td>${book.author}</td>
         <td>${book.isbn}</td>
-        <td><a href="#" class="delete"><i class="far fa-window-close fa-2x"></i></a></td>    `
+        <td><a href="#" class="delete"><i class="far fa-window-close fa-2x"></i></a></td>`
 
     list.appendChild(row);
 
@@ -49,6 +46,14 @@ UI.prototype.showAlert = function(message, className) {
     }, 2000);
 }
 
+// UI delete book
+UI.prototype.deleteBook = function(target) {
+    if(target.parentElement.className === 'delete') {
+        // we used parent element twice because <a> tag is generated inside a <td> which is inside a <tr>
+        target.parentElement.parentElement.parentElement.remove();
+    }
+}
+
 // clear fields function
     UI.prototype.clearFields = function() {
         document.getElementById('title').value = '';
@@ -56,7 +61,7 @@ UI.prototype.showAlert = function(message, className) {
         document.getElementById('isbn').value = '';
     }
 
-// Event listeners
+// Event listeners for the form
 document.getElementById('book-form').addEventListener('submit',function(e) {
     e.preventDefault();
 
@@ -70,7 +75,6 @@ document.getElementById('book-form').addEventListener('submit',function(e) {
 
     // insitantiate ui object from UI constructor
     const ui = new UI();
-
     // validation
     if(title === '' || author === '' || isbn === '') {
         // error alert 
@@ -83,6 +87,19 @@ document.getElementById('book-form').addEventListener('submit',function(e) {
         // clear all fields
         ui.clearFields();
     }
-
-    
 });
+
+// Event listener for delete button
+// using event delegation
+document.getElementById('book-list').addEventListener('click', (e) => {
+    // instantiate ui object
+    const ui = new UI();
+
+    // delete book
+    ui.deleteBook(e.target);
+
+    // show alert after book's deletion
+    ui.showAlert('Book Removed', 'error');
+
+    e.preventDefault();
+})

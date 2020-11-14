@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@500&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -7,6 +8,21 @@
 
 body {
   background-color: #c7c7c7;
+}
+h1, label {
+  font-family: 'Rubik', sans-serif;
+}
+table {
+  font-family: 'Playfair Display', serif;
+} 
+th {
+  font-size: 2.0rem;
+  letter-spacing: 3px;
+  
+}
+td {
+  font-family: 'Rubik', sans-serif;
+  color: rgb(56, 116, 194);
 }
 
 .delete {
@@ -20,7 +36,9 @@ body {
   padding: 5px;
   margin: 5px 0 15px 0;
 }
-
+.alert {
+  font-family: 'Rubik', sans-serif;
+}
 .success {
   background-color: rgba(57, 173, 12, 0.65);
 }
