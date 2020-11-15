@@ -75,6 +75,7 @@ document.getElementById('book-form').addEventListener('submit',function(e) {
 
     // insitantiate ui object from UI constructor
     const ui = new UI();
+
     // validation
     if(title === '' || author === '' || isbn === '') {
         // error alert 

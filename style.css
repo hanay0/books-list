@@ -13,7 +13,7 @@ h1, label {
   font-family: 'Rubik', sans-serif;
 }
 table {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Rubik', sans-serif;
 } 
 th {
   font-size: 2.0rem;
@@ -23,6 +23,10 @@ th {
 td {
   font-family: 'Rubik', sans-serif;
   color: rgb(56, 116, 194);
+}
+input[type=submit] {
+  font-size: 14px;
+  border: 1px solid rgb(56, 116, 194);
 }
 
 .delete {
